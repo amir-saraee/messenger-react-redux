@@ -1,6 +1,9 @@
-import { Link } from 'react-router-dom'
+/* eslint-disable-next-line */
+import { Fragment } from 'react'
+import { Link, useHistory } from 'react-router-dom'
 import { MessageCircle } from 'react-feather'
 import InputPasswordToggle from '@components/input-password-toggle'
+import classnames from 'classnames'
 import {
   Card,
   CardBody,
@@ -13,9 +16,65 @@ import {
   CustomInput,
   Button
 } from 'reactstrap'
+import { useForm } from 'react-hook-form'
+import useJwt from '@src/auth/jwt/useJwt'
+import { useDispatch } from 'react-redux'
+import { handleLogin } from '@store/actions/auth'
+import { getHomeRouteForLoggedInUser, isObjEmpty } from '@utils'
+import { toast, Slide } from 'react-toastify'
 import '@styles/base/pages/page-auth.scss'
 
+const ToastContent = ({ type }) => (
+  <Fragment>
+    <div className='toastify-header'>
+      <div className='title-wrapper'>
+        <h6 className='toast-title font-weight-bold'>
+          {type === 'success' ? 'Welcome' : 'Error'}
+        </h6>
+      </div>
+    </div>
+    <div className='toastify-body'>
+      <span>
+        {type === 'success'
+          ? 'You have successfully logged in as an user to Messenger. Now you can start to explore. Enjoy!'
+          : 'Something went wrong... Please try again later.'}
+      </span>
+    </div>
+  </Fragment>
+)
+
 const Login = () => {
+  const { handleSubmit, errors, register } = useForm()
+  const dispatch = useDispatch()
+  const history = useHistory()
+
+  const formSubmitHandler = async (d) => {
+    if (isObjEmpty(errors)) {
+      useJwt
+        .login(d)
+        .then((res) => {
+          console.log(res)
+          const data = {
+            accessToken: res.data.token
+          }
+          dispatch(handleLogin(data))
+          history.push(getHomeRouteForLoggedInUser('admin'))
+          toast.success(<ToastContent type='success' />, {
+            transition: Slide,
+            hideProgressBar: true,
+            autoClose: 3000
+          })
+        })
+        .catch((err) => {
+          console.log(err.response)
+          toast.error(<ToastContent type='error' />, {
+            transition: Slide,
+            hideProgressBar: true,
+            autoClose: 3000
+          })
+        })
+    }
+  }
   return (
     <div className='auth-wrapper auth-v1 px-2'>
       <div className='auth-inner py-2'>
@@ -37,7 +96,7 @@ const Login = () => {
             </CardText>
             <Form
               className='auth-login-form mt-2'
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSubmit(formSubmitHandler)}
             >
               <FormGroup>
                 <Label className='form-label' for='login-phone'>
@@ -45,9 +104,14 @@ const Login = () => {
                 </Label>
                 <Input
                   type='text'
-                  id='login-phone'
+                  id='login-userName'
+                  name='userName'
                   placeholder='Please enter your phone number...'
+                  className={classnames({
+                    'is-invalid': errors['userName']
+                  })}
                   autoFocus
+                  innerRef={register({ required: true })}
                 />
               </FormGroup>
               <FormGroup>
@@ -62,6 +126,11 @@ const Login = () => {
                 <InputPasswordToggle
                   className='input-group-merge'
                   id='login-password'
+                  name='pass'
+                  innerRef={register({ required: true })}
+                  className={classnames({
+                    'is-invalid': errors['pass']
+                  })}
                 />
               </FormGroup>
               <FormGroup>
@@ -72,7 +141,7 @@ const Login = () => {
                   label='Remember Me'
                 />
               </FormGroup>
-              <Button.Ripple color='primary' block>
+              <Button.Ripple type='submit' color='primary' block>
                 Sign in
               </Button.Ripple>
             </Form>
