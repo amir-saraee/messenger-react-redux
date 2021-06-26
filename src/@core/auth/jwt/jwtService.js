@@ -23,7 +23,7 @@ export default class JwtService {
         // ** If token is present add it to request's Authorization Header
         if (accessToken) {
           // ** eslint-disable-next-line no-param-reassign
-          config.headers.Authorization = `${this.jwtConfig.tokenType} ${accessToken}`
+          config.headers.Token = accessToken
         }
         return config
       },
@@ -78,7 +78,7 @@ export default class JwtService {
   }
 
   getToken() {
-    return localStorage.getItem(this.jwtConfig.storageTokenKeyName)
+    return JSON.parse(localStorage.getItem(this.jwtConfig.storageTokenKeyName))
   }
 
   getRefreshToken() {

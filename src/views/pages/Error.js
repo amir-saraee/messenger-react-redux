@@ -10,16 +10,34 @@ const Error = () => {
       <a className='brand-logo' href='/'>
         <svg viewBox='0 0 139 95' version='1.1' height='28'>
           <defs>
-            <linearGradient x1='100%' y1='10.5120544%' x2='50%' y2='89.4879456%' id='linearGradient-1'>
+            <linearGradient
+              x1='100%'
+              y1='10.5120544%'
+              x2='50%'
+              y2='89.4879456%'
+              id='linearGradient-1'
+            >
               <stop stopColor='#000000' offset='0%'></stop>
               <stop stopColor='#FFFFFF' offset='100%'></stop>
             </linearGradient>
-            <linearGradient x1='64.0437835%' y1='46.3276743%' x2='37.373316%' y2='100%' id='linearGradient-2'>
+            <linearGradient
+              x1='64.0437835%'
+              y1='46.3276743%'
+              x2='37.373316%'
+              y2='100%'
+              id='linearGradient-2'
+            >
               <stop stopColor='#EEEEEE' stopOpacity='0' offset='0%'></stop>
               <stop stopColor='#FFFFFF' offset='100%'></stop>
             </linearGradient>
           </defs>
-          <g id='Page-1' stroke='none' strokeWidth='1' fill='none' fillRule='evenodd'>
+          <g
+            id='Page-1'
+            stroke='none'
+            strokeWidth='1'
+            fill='none'
+            fillRule='evenodd'
+          >
             <g id='Artboard' transform='translate(-400.000000, -178.000000)'>
               <g id='Group' transform='translate(400.000000, 178.000000)'>
                 <path
@@ -61,8 +79,15 @@ const Error = () => {
       <div className='misc-inner p-2 p-sm-3'>
         <div className='w-100 text-center'>
           <h2 className='mb-1'>Page Not Found 🕵🏻‍♀️</h2>
-          <p className='mb-2'>Oops! 😖 The requested URL was not found on this server.</p>
-          <Button.Ripple tag={Link} to='/' color='primary' className='btn-sm-block mb-2'>
+          <p className='mb-2'>
+            Oops! 😖 The requested URL was not found on this server.
+          </p>
+          <Button.Ripple
+            tag={Link}
+            to='/'
+            color='primary'
+            className='btn-sm-block mb-2'
+          >
             Back to home
           </Button.Ripple>
           <img className='img-fluid' src={errorImg} alt='Not authorized page' />

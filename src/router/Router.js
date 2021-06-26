@@ -12,7 +12,12 @@ import { useRouterTransition } from '@hooks/useRouterTransition'
 import LayoutWrapper from '@layouts/components/layout-wrapper'
 
 // ** Router Components
-import { BrowserRouter as AppRouter, Route, Switch, Redirect } from 'react-router-dom'
+import {
+  BrowserRouter as AppRouter,
+  Route,
+  Switch,
+  Redirect
+} from 'react-router-dom'
 
 // ** Routes & Default Routes
 import { DefaultRoute, Routes } from './routes'
@@ -31,7 +36,8 @@ const Router = () => {
   const ability = useContext(AbilityContext)
 
   // ** Default Layout
-  const DefaultLayout = layout === 'horizontal' ? 'HorizontalLayout' : 'VerticalLayout'
+  const DefaultLayout =
+    layout === 'horizontal' ? 'HorizontalLayout' : 'VerticalLayout'
 
   // ** All of the available layouts
   const Layouts = { BlankLayout, VerticalLayout, HorizontalLayout }
@@ -40,14 +46,17 @@ const Router = () => {
   const currentActiveItem = null
 
   // ** Return Filtered Array of Routes & Paths
-  const LayoutRoutesAndPaths = layout => {
+  const LayoutRoutesAndPaths = (layout) => {
     const LayoutRoutes = []
     const LayoutPaths = []
 
     if (Routes) {
-      Routes.filter(route => {
+      Routes.filter((route) => {
         // ** Checks if Route layout or Default layout matches current layout
-        if (route.layout === layout || (route.layout === undefined && DefaultLayout === layout)) {
+        if (
+          route.layout === layout ||
+          (route.layout === undefined && DefaultLayout === layout)
+        ) {
           LayoutRoutes.push(route)
           LayoutPaths.push(route.path)
         }
@@ -57,15 +66,15 @@ const Router = () => {
     return { LayoutRoutes, LayoutPaths }
   }
 
-  const NotAuthorized = lazy(() => import('@src/views/NotAuthorized'))
+  const NotAuthorized = lazy(() => import('@src/views/pages/NotAuthorized'))
 
   // ** Init Error Component
-  const Error = lazy(() => import('@src/views/Error'))
+  const Error = lazy(() => import('@src/views/pages/Error'))
 
   /**
    ** Final Route Component Checks for Login & User Role and then redirects to the route
    */
-  const FinalRoute = props => {
+  const FinalRoute = (props) => {
     const route = props.route
     let action, resource
 
@@ -77,7 +86,10 @@ const Router = () => {
 
     if (
       (!isUserLoggedIn() && route.meta === undefined) ||
-      (!isUserLoggedIn() && route.meta && !route.meta.authRoute && !route.meta.publicRoute)
+      (!isUserLoggedIn() &&
+        route.meta &&
+        !route.meta.authRoute &&
+        !route.meta.publicRoute)
     ) {
       /**
        ** If user is not Logged in & route meta is undefined
@@ -129,13 +141,13 @@ const Router = () => {
             currentActiveItem={currentActiveItem}
           >
             <Switch>
-              {LayoutRoutes.map(route => {
+              {LayoutRoutes.map((route) => {
                 return (
                   <Route
                     key={route.path}
                     path={route.path}
                     exact={route.exact === true}
-                    render={props => {
+                    render={(props) => {
                       // ** Assign props to routerProps
                       Object.assign(routerProps, {
                         ...props,
@@ -188,13 +200,17 @@ const Router = () => {
     <AppRouter basename={process.env.REACT_APP_BASENAME}>
       <Switch>
         {/* If user is logged in Redirect user to DefaultRoute else to login */}
-        {/* <Route
+        <Route
           exact
           path='/'
           render={() => {
-            return isUserLoggedIn() ? <Redirect to={DefaultRoute} /> : <Redirect to='/login' />
+            return isUserLoggedIn() ? (
+              <Redirect to={DefaultRoute} />
+            ) : (
+              <Redirect to='/login' />
+            )
           }}
-        /> */}
+        />
         <Route
           exact
           path='/'
@@ -206,7 +222,7 @@ const Router = () => {
         <Route
           exact
           path='/not-authorized'
-          render={props => (
+          render={(props) => (
             <Layouts.BlankLayout>
               <NotAuthorized />
             </Layouts.BlankLayout>
