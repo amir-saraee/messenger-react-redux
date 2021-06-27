@@ -44,6 +44,7 @@ const GeneralTabs = ({ userData }) => {
   )
 
   const onChange = (e) => {
+    console.log(e)
     const reader = new FileReader(),
       files = e.target.files
     reader.onload = function () {

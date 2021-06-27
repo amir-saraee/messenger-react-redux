@@ -34,6 +34,12 @@ const PagesRoutes = [
     path: '/error',
     component: lazy(() => import('../../views/pages/Error')),
     layout: 'BlankLayout'
+  },
+  {
+    path: '/messenger',
+    appLayout: true,
+    className: 'chat-application',
+    component: lazy(() => import('../../views/apps/chat'))
   }
 ]
 

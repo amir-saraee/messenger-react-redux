@@ -5,11 +5,13 @@ import { combineReducers } from 'redux'
 import auth from './auth'
 import navbar from './navbar'
 import layout from './layout'
+import chat from '@src/views/apps/chat/store/reducer'
 
 const rootReducer = combineReducers({
   auth,
   navbar,
-  layout
+  layout,
+  chat
 })
 
 export default rootReducer
