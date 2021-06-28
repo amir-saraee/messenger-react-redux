@@ -2,6 +2,9 @@ import { Home, Users } from 'react-feather'
 
 export default [
   {
+    header: 'Apps'
+  },
+  {
     id: 'home',
     title: 'Home',
     icon: <Home size={20} />,

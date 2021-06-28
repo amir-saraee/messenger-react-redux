@@ -9,3 +9,74 @@ NOTE:
 ------
 PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
 WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+@import '../../@core/scss/base/colors.scss';
+
+.chat-application .sidebar-content .chat-fixed-search {
+  flex-direction: column;
+  height: auto !important;
+  padding-bottom: 10px !important;
+}
+
+.chat-application .sidebar-content .chat-fixed-search .chat-fixed-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.chat-application .sidebar-content .chat-fixed-search .chat-fixed-head h4 {
+  margin-bottom: 0;
+  color: $primary;
+}
+
+.chat-application .sidebar-content .chat-fixed-search .chat-fixed-head button {
+  background: none;
+  border: none;
+}
+
+.create-group-form > div {
+  margin-bottom: 20px;
+}
+
+.create-group-form > div > label {
+  width: 100%;
+  padding-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.group-privacy-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.search-members {
+  position: relative;
+}
+
+.search-members-icon {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+}
+
+.find-members-wraper {
+  height: 200px;
+  position: relative;
+  margin-top: 10px;
+}
+
+.find-members-wraper > .member-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 1px solid $border-color;
+}
+
+.member-info span {
+  margin-left: 10px;
+  font-weight: 600;
+}
