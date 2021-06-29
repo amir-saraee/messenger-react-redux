@@ -27,6 +27,14 @@ export const handleLogin = (data) => {
   }
 }
 
+export const handleProfile = (data) => (dispatch) => {
+  console.log(data)
+  dispatch({
+    type: 'PROFILE',
+    data
+  })
+}
+
 // ** Handle User Logout
 export const handleLogout = () => {
   return (dispatch) => {

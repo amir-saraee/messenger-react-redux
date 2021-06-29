@@ -9,7 +9,7 @@ import Avatar from '@components/avatar'
 import { isUserLoggedIn } from '@utils'
 
 // ** Store & Actions
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { handleLogout } from '@store/actions/auth'
 
 // ** Third Party Components
@@ -27,6 +27,7 @@ import defaultAvatar from '@src/assets/images/portrait/small/avatar-s-11.jpg'
 const UserDropdown = () => {
   // ** Store Vars
   const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
 
   // ** State
   const [userData, setUserData] = useState(null)
@@ -34,7 +35,7 @@ const UserDropdown = () => {
   //** ComponentDidMount
   useEffect(() => {
     if (isUserLoggedIn() !== null) {
-      setUserData(JSON.parse(localStorage.getItem('userData')))
+      setUserData(auth.userData)
     }
   }, [])
 
@@ -51,10 +52,10 @@ const UserDropdown = () => {
       >
         <div className='user-nav d-sm-flex d-none'>
           <span className='user-name font-weight-bold'>
-            {(userData && userData['username']) || 'John Doe'}
+            {(userData && userData?.name) || ''}
           </span>
           <span className='user-status'>
-            {(userData && userData.role) || 'Admin'}
+            {(userData && userData?.role) || ''}
           </span>
         </div>
         <Avatar img={userAvatar} imgHeight='40' imgWidth='40' status='online' />

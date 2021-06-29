@@ -5,7 +5,7 @@ import Breadcrumbs from '@components/breadcrumbs'
 import GeneralTabContent from './GeneralTabContent'
 import PasswordTabContent from './PasswordTabContent'
 import { Row, Col, TabContent, TabPane, Card, CardBody } from 'reactstrap'
-import useJwt from '@src/auth/jwt/useJwt'
+import { useSelector } from 'react-redux'
 
 import '@styles/react/libs/flatpickr/flatpickr.scss'
 import '@styles/react/pages/page-account-settings.scss'
@@ -13,24 +13,16 @@ import '@styles/react/pages/page-account-settings.scss'
 const AccountSettings = () => {
   const [activeTab, setActiveTab] = useState('1'),
     [userData, setUserData] = useState(null)
+  // const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    setUserData(auth.userData)
+  }, [])
 
   const toggleTab = (tab) => {
     setActiveTab(tab)
   }
-
-  useEffect(() => {
-    const sendRequest = async () => {
-      try {
-        const response = await axios.get(
-          'http://130.185.75.133:8080/get_user_info'
-        )
-        setUserData(response.data)
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    sendRequest()
-  }, [])
 
   return (
     <Fragment>

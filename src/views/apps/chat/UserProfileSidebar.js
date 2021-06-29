@@ -4,14 +4,28 @@ import Avatar from '@components/avatar'
 // ** Third Party Components
 import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
-import { X, Mail, PhoneCall, Clock, Tag, Star, Image, Trash, Slash } from 'react-feather'
+import {
+  X,
+  Mail,
+  PhoneCall,
+  Clock,
+  Tag,
+  Star,
+  Image,
+  Trash,
+  Slash
+} from 'react-feather'
 
-const UserProfileSidebar = props => {
+const UserProfileSidebar = (props) => {
   // ** Props
   const { user, handleUserSidebarRight, userSidebarRight } = props
 
   return (
-    <div className={classnames('user-profile-sidebar', { show: userSidebarRight === true })}>
+    <div
+      className={classnames('user-profile-sidebar', {
+        show: userSidebarRight === true
+      })}
+    >
       <header className='user-profile-header'>
         <span className='close-icon' onClick={handleUserSidebarRight}>
           <X size={14} />
@@ -20,18 +34,21 @@ const UserProfileSidebar = props => {
           <Avatar
             className='box-shadow-1 avatar-border'
             size='xl'
-            status={user.status}
-            img={user.avatar}
+            status={user?.status}
+            img={user?.avatar}
             imgHeight='70'
             imgWidth='70'
           />
-          <h4 className='chat-user-name'>{user.fullName}</h4>
-          <span className='user-post'>{user.role}</span>
+          <h4 className='chat-user-name'>{user?.fullName}</h4>
+          <span className='user-post'>{user?.role}</span>
         </div>
       </header>
-      <PerfectScrollbar className='user-profile-sidebar-area' options={{ wheelPropagation: false }}>
+      <PerfectScrollbar
+        className='user-profile-sidebar-area'
+        options={{ wheelPropagation: false }}
+      >
         <h6 className='section-label mb-1'>About</h6>
-        <p>{user.about}</p>
+        <p>{user?.about}</p>
         <div className='personal-info'>
           <h6 className='section-label mb-1 mt-3'>Personal Information</h6>
           <ul className='list-unstyled'>

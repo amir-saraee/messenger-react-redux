@@ -8,10 +8,12 @@ import UserProfileSidebar from './UserProfileSidebar'
 
 // ** Third Party Components
 import classnames from 'classnames'
+import axios from 'axios'
 
 // ** Store & Actions
 import { useDispatch, useSelector } from 'react-redux'
 import { getUserProfile, getChatContacts } from './store/actions'
+import { handleProfile } from '../../../redux/actions/auth'
 
 import '@styles/base/pages/app-chat.scss'
 import '@styles/base/pages/app-chat-list.scss'
@@ -20,7 +22,6 @@ const AppChat = () => {
   // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector((state) => state.chat)
-  console.log(store)
 
   // ** States
   const [user, setUser] = useState({})
@@ -46,6 +47,21 @@ const AppChat = () => {
     dispatch(getChatContacts())
     dispatch(getUserProfile())
   }, [dispatch])
+
+  // ** Get user profile
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await axios.get(
+          'http://130.185.75.133:8080/get_user_info'
+        )
+        dispatch(handleProfile(response.data))
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    sendRequest()
+  }, [])
 
   return (
     <Fragment>
