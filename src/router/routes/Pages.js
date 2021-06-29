@@ -36,7 +36,7 @@ const PagesRoutes = [
     layout: 'BlankLayout'
   },
   {
-    path: '/messenger',
+    path: '/app',
     appLayout: true,
     className: 'chat-application',
     component: lazy(() => import('../../views/apps/chat'))

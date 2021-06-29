@@ -27,6 +27,7 @@ import {
   UncontrolledTooltip
 } from 'reactstrap'
 import AddGroup from './components/AddGroup'
+import AvatarImg from '../../../assets/images/avatars/1-small.png'
 
 const SidebarLeft = (props) => {
   // ** Props & Store
@@ -37,7 +38,7 @@ const SidebarLeft = (props) => {
     userSidebarLeft,
     handleUserSidebarLeft
   } = props
-  const { chats, contacts, userProfile } = store
+  const { chats, contacts, userProfile, groups } = store
 
   // ** Dispatch
   const dispatch = useDispatch()
@@ -62,7 +63,7 @@ const SidebarLeft = (props) => {
 
   // ** Renders Chat
   const renderChats = () => {
-    if (chats && chats.length) {
+    if (groups && groups.length) {
       if (query.length && !filteredChat.length) {
         return (
           <li className='no-results show'>
@@ -71,12 +72,12 @@ const SidebarLeft = (props) => {
         )
       } else {
         const arrToMap =
-          query.length && filteredChat.length ? filteredChat : chats
+          query.length && filteredChat.length ? filteredChat : groups
 
         return arrToMap.map((item) => {
-          const time = formatDateToMonthShort(
-            item.chat.lastMessage ? item.chat.lastMessage.time : new Date()
-          )
+          // const time = formatDateToMonthShort(
+          //   item.chat.lastMessage ? item.chat.lastMessage.time : new Date()
+          // )
 
           return (
             <li
@@ -87,28 +88,29 @@ const SidebarLeft = (props) => {
               onClick={() => handleUserClick('chat', item.id)}
             >
               <Avatar
-                img={item.avatar}
+                img={AvatarImg}
                 imgHeight='42'
                 imgWidth='42'
-                status={item.status}
+                // status={item.status}
               />
               <div className='chat-info flex-grow-1'>
-                <h5 className='mb-0'>{item.fullName}</h5>
-                <CardText className='text-truncate'>
+                <h5 className='mb-0'>Group Name</h5>
+                <span>id: {item.id}</span>
+                {/* <CardText className='text-truncate'>
                   {item.chat.lastMessage
                     ? item.chat.lastMessage.message
                     : chats[chats.length - 1].message}
-                </CardText>
+                </CardText> */}
               </div>
               <div className='chat-meta text-nowrap'>
                 <small className='float-right mb-25 chat-time ml-25'>
-                  {time}
+                  {/* {time} */}
                 </small>
-                {item.chat.unseenMsgs >= 1 ? (
+                {/* {item.chat.unseenMsgs >= 1 ? (
                   <Badge className='float-right' color='danger' pill>
                     {item.chat.unseenMsgs}
                   </Badge>
-                ) : null}
+                ) : null} */}
               </div>
             </li>
           )
@@ -354,14 +356,14 @@ const SidebarLeft = (props) => {
             className='chat-user-list-wrapper list-group'
             options={{ wheelPropagation: false }}
           >
-            <h4 className='chat-list-title'>Chats</h4>
+            <h4 className='chat-list-title'>Groups</h4>
             <ul className='chat-users-list chat-list media-list'>
               {renderChats()}
             </ul>
-            <h4 className='chat-list-title'>Contacts</h4>
+            {/* <h4 className='chat-list-title'>Contacts</h4>
             <ul className='chat-users-list contact-list media-list'>
               {renderContacts()}
-            </ul>
+            </ul> */}
           </PerfectScrollbar>
         </div>
       </div>

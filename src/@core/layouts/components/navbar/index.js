@@ -4,13 +4,19 @@ import { Fragment } from 'react'
 // ** Custom Components
 import NavbarUser from './NavbarUser'
 
-const ThemeNavbar = props => {
+const ThemeNavbar = (props) => {
   // ** Props
-  const { skin, setSkin, setMenuVisibility } = props
+  const { skin, setSkin, setMenuVisibility, isRtl, setIsRtl } = props
 
   return (
     <Fragment>
-      <NavbarUser skin={skin} setSkin={setSkin} setMenuVisibility={setMenuVisibility} />
+      <NavbarUser
+        skin={skin}
+        setSkin={setSkin}
+        setMenuVisibility={setMenuVisibility}
+        isRtl={isRtl}
+        setIsRtl={setIsRtl}
+      />
     </Fragment>
   )
 }

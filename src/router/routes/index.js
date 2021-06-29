@@ -5,7 +5,7 @@ import PagesRoutes from './Pages'
 const TemplateTitle = 'Messenger app'
 
 // ** Default Route
-const DefaultRoute = '/home'
+const DefaultRoute = '/app'
 
 // ** Merge Routes
 const Routes = [...PagesRoutes]

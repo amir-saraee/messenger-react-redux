@@ -2,7 +2,9 @@ const initialState = {
   chats: [],
   contacts: [],
   userProfile: {},
-  selectedUser: {}
+  selectedUser: {},
+  groups: [],
+  groupData: {}
 }
 
 const chatReducer = (state = initialState, action) => {
@@ -10,9 +12,9 @@ const chatReducer = (state = initialState, action) => {
     case 'GET_USER_PROFILE':
       return { ...state, userProfile: action.userProfile }
     case 'GET_CHAT_CONTACTS':
-      return { ...state, chats: action.data.chatsContacts, contacts: action.data.contacts }
+      return { ...state, groups: action.data }
     case 'SELECT_CHAT':
-      return { ...state, selectedUser: action.data }
+      return { ...state, groupData: action.data }
     case 'SEND_MSG':
       // ** Add new msg to chat
       const newMsg = action.data.response.chat

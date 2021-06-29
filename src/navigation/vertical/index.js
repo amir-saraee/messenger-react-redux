@@ -2,18 +2,9 @@ import { Home, Users } from 'react-feather'
 
 export default [
   {
-    header: 'Apps'
-  },
-  {
     id: 'home',
     title: 'Home',
     icon: <Home size={20} />,
-    navLink: '/home'
-  },
-  {
-    id: 'groups',
-    title: 'Groups',
-    icon: <Users size={20} />,
-    navLink: '/second-page'
+    navLink: '/app'
   }
 ]

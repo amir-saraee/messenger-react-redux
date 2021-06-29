@@ -5,11 +5,11 @@ import UserDropdown from './UserDropdown'
 
 // ** Third Party Components
 import { Sun, Moon, Menu } from 'react-feather'
-import { NavItem, NavLink } from 'reactstrap'
+import { Button, NavItem, NavLink } from 'reactstrap'
 
-const NavbarUser = props => {
+const NavbarUser = (props) => {
   // ** Props
-  const { skin, setSkin, setMenuVisibility } = props
+  const { skin, setSkin, setMenuVisibility, isRtl, setIsRtl } = props
 
   // ** Function to toggle Theme (Light/Dark)
   const ThemeToggler = () => {
@@ -24,16 +24,28 @@ const NavbarUser = props => {
     <Fragment>
       <ul className='navbar-nav d-xl-none d-flex align-items-center'>
         <NavItem className='mobile-menu mr-auto'>
-          <NavLink className='nav-menu-main menu-toggle hidden-xs is-active' onClick={() => setMenuVisibility(true)}>
+          <NavLink
+            className='nav-menu-main menu-toggle hidden-xs is-active'
+            onClick={() => setMenuVisibility(true)}
+          >
             <Menu className='ficon' />
           </NavLink>
         </NavItem>
       </ul>
       <div className='bookmark-wrapper d-flex align-items-center'>
-        <NavItem className='d-none d-lg-block'>
-          <NavLink className='nav-link-style'>
+        <NavItem className='d-none d-lg-flex'>
+          <NavLink className='nav-link-style '>
             <ThemeToggler />
           </NavLink>
+          {isRtl ? (
+            <Button size='sm' onClick={() => setIsRtl(false)}>
+              LTR
+            </Button>
+          ) : (
+            <Button size='sm' onClick={() => setIsRtl(true)}>
+              RTL
+            </Button>
+          )}
         </NavItem>
       </div>
       <ul className='nav navbar-nav align-items-center ml-auto'>

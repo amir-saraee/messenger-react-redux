@@ -20,6 +20,7 @@ const AppChat = () => {
   // ** Store Vars
   const dispatch = useDispatch()
   const store = useSelector((state) => state.chat)
+  console.log(store)
 
   // ** States
   const [user, setUser] = useState({})

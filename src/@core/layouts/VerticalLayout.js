@@ -4,7 +4,11 @@ import { useLocation } from 'react-router-dom'
 
 // ** Store & Actions
 import { useSelector, useDispatch } from 'react-redux'
-import { handleMenuCollapsed, handleContentWidth, handleMenuHidden } from '@store/actions/layout'
+import {
+  handleMenuCollapsed,
+  handleContentWidth,
+  handleMenuHidden
+} from '@store/actions/layout'
 
 // ** Third Party Components
 import classnames from 'classnames'
@@ -32,9 +36,10 @@ import { useNavbarColor } from '@hooks/useNavbarColor'
 import '@styles/base/core/menu/menu-types/vertical-menu.scss'
 import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
 
-const VerticalLayout = props => {
+const VerticalLayout = (props) => {
   // ** Props
-  const { children, navbar, footer, menu, routerProps, currentActiveItem } = props
+  const { children, navbar, footer, menu, routerProps, currentActiveItem } =
+    props
 
   // ** Hooks
   const [skin, setSkin] = useSkin()
@@ -50,7 +55,7 @@ const VerticalLayout = props => {
 
   // ** Store Vars
   const dispatch = useDispatch()
-  const layoutStore = useSelector(state => state.layout)
+  const layoutStore = useSelector((state) => state.layout)
 
   // ** Update Window Width
   const handleWindowWidth = () => {
@@ -64,13 +69,13 @@ const VerticalLayout = props => {
   const isHidden = layoutStore.menuHidden
 
   // ** Toggles Menu Collapsed
-  const setMenuCollapsed = val => dispatch(handleMenuCollapsed(val))
+  const setMenuCollapsed = (val) => dispatch(handleMenuCollapsed(val))
 
   // ** Handles Content Width
-  const setContentWidth = val => dispatch(handleContentWidth(val))
+  const setContentWidth = (val) => dispatch(handleContentWidth(val))
 
   // ** Handles Content Width
-  const setIsHidden = val => dispatch(handleMenuHidden(val))
+  const setIsHidden = (val) => dispatch(handleMenuHidden(val))
 
   //** This function will detect the Route Change and will hide the menu on menu item click
   useEffect(() => {
@@ -113,7 +118,8 @@ const VerticalLayout = props => {
     hidden: 'd-none'
   }
 
-  const bgColorCondition = navbarColor !== '' && navbarColor !== 'light' && navbarColor !== 'white'
+  const bgColorCondition =
+    navbarColor !== '' && navbarColor !== 'light' && navbarColor !== 'white'
 
   if (!isMounted) {
     return null
@@ -121,9 +127,9 @@ const VerticalLayout = props => {
   return (
     <div
       className={classnames(
-        `wrapper vertical-layout ${navbarWrapperClasses[navbarType] || 'navbar-floating'} ${
-          footerClasses[footerType] || 'footer-static'
-        }`,
+        `wrapper vertical-layout ${
+          navbarWrapperClasses[navbarType] || 'navbar-floating'
+        } ${footerClasses[footerType] || 'footer-static'}`,
         {
           // Modern Menu
           'vertical-menu-modern': windowWidth >= 1200,
@@ -157,11 +163,23 @@ const VerticalLayout = props => {
         dark={skin === 'dark' || bgColorCondition}
         color={bgColorCondition ? navbarColor : undefined}
         className={classnames(
-          `header-navbar navbar align-items-center ${navbarClasses[navbarType] || 'floating-nav'} navbar-shadow`
+          `header-navbar navbar align-items-center ${
+            navbarClasses[navbarType] || 'floating-nav'
+          } navbar-shadow`
         )}
       >
         <div className='navbar-container d-flex content'>
-          {navbar ? navbar : <NavbarComponent setMenuVisibility={setMenuVisibility} skin={skin} setSkin={setSkin} />}
+          {navbar ? (
+            navbar
+          ) : (
+            <NavbarComponent
+              setMenuVisibility={setMenuVisibility}
+              skin={skin}
+              setSkin={setSkin}
+              isRtl={isRtl}
+              setIsRtl={setIsRtl}
+            />
+          )}
         </div>
       </Navbar>
       {children}
@@ -201,11 +219,21 @@ const VerticalLayout = props => {
         />
       ) : null}
       <footer
-        className={classnames(`footer footer-light ${footerClasses[footerType] || 'footer-static'}`, {
-          'd-none': footerType === 'hidden'
-        })}
+        className={classnames(
+          `footer footer-light ${footerClasses[footerType] || 'footer-static'}`,
+          {
+            'd-none': footerType === 'hidden'
+          }
+        )}
       >
-        {footer ? footer : <FooterComponent footerType={footerType} footerClasses={footerClasses} />}
+        {footer ? (
+          footer
+        ) : (
+          <FooterComponent
+            footerType={footerType}
+            footerClasses={footerClasses}
+          />
+        )}
       </footer>
 
       {themeConfig.layout.scrollTop === true ? (
